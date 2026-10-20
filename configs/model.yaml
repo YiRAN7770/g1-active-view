@@ -1,0 +1,30 @@
+model:
+  checkpoint: models/va_sft_577_best.pt
+  variant: visual_stop_residual
+  dino_source: third_party/dinov2
+  dino_weights: models/dinov2_vitb14_pretrain.pth
+  device: cpu
+  action_table_version: internal-nine-actions-v1
+preprocessing:
+  image_input: RGB
+  resize_width: 280
+  resize_height: 210
+  interpolation: PIL.Image.Resampling.BILINEAR
+  pixel_range: 0..1
+  dtype: float32
+  channel_order: CHW
+  imagenet_mean: [0.485, 0.456, 0.406]
+  imagenet_std: [0.229, 0.224, 0.225]
+  history_length: 8
+recovery:
+  enabled: false
+  pitch_threshold_deg: 5.0
+  low_similarity: 0.60
+  consecutive_observations: 3
+  min_duration_s: 3.0
+  max_progress: 0.02
+  confidence_threshold: 0.45
+  margin_threshold: 0.15
+  min_visual_inliers: 12
+  cooldown_decisions: 3
+  max_overrides_per_episode: 3

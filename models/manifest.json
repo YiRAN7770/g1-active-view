@@ -1,0 +1,34 @@
+{
+  "package": "g1-active-view-stage-a",
+  "policy_checkpoint": {
+    "file": "va_sft_577_best.pt",
+    "purpose": "retained VA-SFT policy for offline visual-action inference",
+    "bytes": 2629191,
+    "sha256": "cc0550846b94505012bb66ce784ac53a30783ee0829cf1300ad837259875a306",
+    "variant": "visual_stop_residual",
+    "source": "gimbal_tvr/models/va_sft_577_best/checkpoint/best.pt"
+  },
+  "dinov2": {
+    "model_variant": "dinov2_vitb14",
+    "weights_file": "dinov2_vitb14_pretrain.pth",
+    "weights_bytes": 346378731,
+    "weights_sha256": "0b8b82f85de91b424aded121c7e1dcc2b7bc6d0adeea651bf73a13307fad8c73",
+    "source_dir": "third_party/dinov2",
+    "source_version": "dinov2 package __version__ 0.0.1",
+    "source_commit": null,
+    "source_commit_note": "The workstation cache has no git metadata; commit cannot be truthfully identified. The exact source directory is vendored in this repository and hashed in docs/validation_report.md.",
+    "official_weight_name": "dinov2_vitb14_pretrain.pth",
+    "source_tree_sha256": "1bd32991d59172509305a98afc73f91e4b42532c36bf01ae70e2d3335ed7488a"
+  },
+  "preprocess_contract": "preprocess-v1-rgb-280x210-imagenet",
+  "action_table_version": "internal-nine-actions-v1",
+  "network_input": {
+    "dino_feature_dim": 13056,
+    "sift_geometry_dim": 61,
+    "history_length": 8
+  },
+  "lfs_required": [
+    "models/va_sft_577_best.pt",
+    "models/dinov2_vitb14_pretrain.pth"
+  ]
+}

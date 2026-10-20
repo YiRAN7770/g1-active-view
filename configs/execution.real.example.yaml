@@ -1,0 +1,13 @@
+mode: real_unconfigured
+actuators_enabled: false
+camera_backend: UNCONFIGURED
+commands_backend: UNCONFIGURED
+serial_device: UNCONFIGURED
+ros_domain_id: UNCONFIGURED
+required_before_enable:
+  - camera_intrinsics_and_rgb_format
+  - gimbal_pan_tilt_zero_and_limits
+  - encoder_feedback
+  - command_watchdog_and_emergency_stop
+  - collision_and_fall_signals
+  - 3s_stop_hold_signal_validation

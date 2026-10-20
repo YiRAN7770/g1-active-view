@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.cache/
+outputs/
+logs/
+rosbag*/
+*.bag
+build/
+install/
+log/
+.env
+*.secret
+*.key
+.DS_Store

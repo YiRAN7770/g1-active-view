@@ -1,0 +1,33 @@
+{
+  "original_repository": {
+    "path": "/home/szu/Project/active_view_g1/gimbal_tvr",
+    "head": "4e5507b",
+    "note": "HEAD does not identify all algorithm files because the source repository had 1605 uncommitted status items at audit time. Hashes below identify the exact files read during extraction."
+  },
+  "files": [
+    {"original":"src/gimbal_tvr/monotone_stop_policy.py","original_sha256":"79a5c00e226cc5225b233f75fca0bc36d6512f137b5e550904eea61077fc2464","deployment":"src/g1_active_view/policies/visual_stop_residual.py","deployment_sha256":"3cbd7188ebeda5e4ffecc3303b7265262ab2cfdf507891444c5f6c312f3a5f19","relation":"visual_stop_residual policy; adapted imports and explicit paths"},
+    {"original":"src/gimbal_tvr/magnitude_visual_policy.py","original_sha256":"7fa136ed9174fdaab39cd00f1b66df08a16a147c63bd2f083c6303e4f5ec1daa","deployment":"src/g1_active_view/policies/visual_stop_residual.py","deployment_sha256":"3cbd7188ebeda5e4ffecc3303b7265262ab2cfdf507891444c5f6c312f3a5f19","relation":"MagnitudePolicy retained inside the current checkpoint class"},
+    {"original":"src/gimbal_tvr/relative_visual_policy.py","original_sha256":"58feef3f94f9ecc885d6a8cd2920a9f7a234e390a58c996403b99803b307ef43","deployment":"src/g1_active_view/vision/sift_geometry.py","deployment_sha256":"3d0aea000d46fa9cd35b0e13c250017f9291d5a97a842607a964091c86ae18cf","relation":"SIFT geometry retained; DINO imports split"},
+    {"original":"src/gimbal_tvr/dedicated_policy.py","original_sha256":"582b564ddf396ddbf7775bb4aedb76530e67c8f189a8f6fe1a3a60de92082647","deployment":"src/g1_active_view/vision/dinov2_encoder.py","deployment_sha256":"7bf2889954eda0156860d746b2c40765f17121908a0e839e974ac8a3de8158c6","relation":"DINOv2 encoder/preprocess retained; absolute paths removed"},
+    {"original":"src/gimbal_tvr/low_head_recovery.py","original_sha256":"2c0e1fb80e8e15ce2e2c0e20cc7ec627b6d0d03266012fa83ee03b239660b5ec","deployment":"src/g1_active_view/safety/low_head_recovery.py","deployment_sha256":"6c5cdaa9641816b6fb27bbfa54595dc9eb7a4cdd14c7b6852946f1dd3b97abd1","relation":"pure guard retained; no hardware access"},
+    {"original":"scripts/grpo_stop_hold.py","original_sha256":"8c2a609e5f5e634c59dc57994ee13eab56685ee776b9d02fb649d2f528e4affc","deployment":"src/g1_active_view/safety/stop_hold.py","deployment_sha256":"2b0c867dd6579aaa245c4afa865d4289c59a215ec02e5f67040fd450e5641db3","relation":"state-only verifier extracted; simulator executor removed"},
+    {"original":"models/va_sft_577_best/checkpoint/best.pt","original_sha256":"cc0550846b94505012bb66ce784ac53a30783ee0829cf1300ad837259875a306","deployment":"models/va_sft_577_best.pt","deployment_sha256":"cc0550846b94505012bb66ce784ac53a30783ee0829cf1300ad837259875a306","relation":"byte-for-byte copy"},
+    {"original":"/home/szu/.cache/torch/hub/facebookresearch_dinov2_main","original_tree_sha256":"77336d2cc3769a957df0ceccef2e3eeda472f02a6386d2638f82422bec302b34","deployment":"third_party/dinov2","deployment_tree_sha256":"1bd32991d59172509305a98afc73f91e4b42532c36bf01ae70e2d3335ed7488a","relation":"vendored source tree; original cache has no git commit"},
+    {"original":"/home/szu/.cache/torch/hub/checkpoints/dinov2_vitb14_pretrain.pth","original_sha256":"0b8b82f85de91b424aded121c7e1dcc2b7bc6d0adeea651bf73a13307fad8c73","deployment":"models/dinov2_vitb14_pretrain.pth","deployment_sha256":"0b8b82f85de91b424aded121c7e1dcc2b7bc6d0adeea651bf73a13307fad8c73","relation":"byte-for-byte copy"}
+  ],
+  "model_selection_evidence": {
+    "source_manifest":"models/va_sft_577_best/manifest.json in original repository",
+    "original_checkpoint":"/home/szu/Project/active_view_g1/gimbal_tvr/models/va_sft_577_best/checkpoint/best.pt",
+    "selection":"round11_low_head_replay",
+    "trajectory_count":577,
+    "variant":"visual_stop_residual",
+    "deployment_manifest":"models/manifest.json"
+  },
+  "baseline": {
+    "original_entry":"src/gimbal_tvr/monotone_stop_policy.py:MonotoneInference.predict",
+    "original_import":"PYTHONPATH=/home/szu/Project/active_view_g1/gimbal_tvr/src unitree_sim_env/bin/python",
+    "inputs":"datasets/fixtures/current_082_xpos.png, target_082.png, blank.png, and explicit histories in tests/fixtures/baseline.json",
+    "source_output":"tests/fixtures/original_output.json",
+    "deployment_output":"tests/fixtures/deployment_output.json"
+  }
+}

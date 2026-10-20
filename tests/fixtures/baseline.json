@@ -1,0 +1,8 @@
+{
+  "source": "gimbal_tvr original MonotoneInference, CPU, same checkpoint and DINOv2 source/weights",
+  "cases": [
+    {"id":"normal_empty_history","current":"datasets/fixtures/current_082_xpos.png","target":"datasets/fixtures/target_082.png","history":[]},
+    {"id":"normal_history_8","current":"datasets/fixtures/current_082_xpos.png","target":"datasets/fixtures/target_082.png","history":["MoveXPos","GimbalPitchUp","MoveYNeg","BodyYawLeft","GimbalPitchDown","MoveXNeg","MoveYPos","Stop"]},
+    {"id":"no_features_stop","current":"datasets/fixtures/blank.png","target":"datasets/fixtures/blank.png","history":[]}
+  ]
+}

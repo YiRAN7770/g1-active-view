@@ -1,0 +1,4 @@
+mode: offline_replay
+actuators_enabled: false
+camera_source: fixture_or_explicit_path
+note: Isaac runtime is intentionally excluded; this file only describes replay inputs.

@@ -1,0 +1,10 @@
+status: NOT_CONFIGURED
+pan_zero_deg: null
+tilt_zero_deg: null
+pan_positive_direction: null
+tilt_positive_direction: null
+pan_limits_deg: null
+tilt_limits_deg: null
+camera_to_gimbal_extrinsics: null
+step_response_measurements: null
+note: Simulation values are deliberately not copied into a real-machine configuration.
