@@ -61,3 +61,31 @@ checkpoint id 从 0 开始，id 9 是历史 padding，不是动作：
 ## Stop 区别
 
 策略 `Stop` 是模型输出；保护层覆盖可以把动作改为 `GimbalPitchUp`，不能把 Stop 当作已停车；故障停车和真实执行器急停属于未实现的硬件层。3 秒稳定验证需要真实速度、yaw/pitch 漂移、碰撞和跌倒信号，缺失信号时必须返回无法验证。
+
+## 离线安全结果语义
+
+`runtime.offline.OfflineRuntime` 输出 `raw_action`、`selected_action`、
+`protected_action`、`valid`、`failure_reason`、`image_validity` 和
+`task_success`。离线推理本身永远返回 `task_success=false`；Stop 只表示策略
+提议停车，必须由 `safety.stop_hold.verify_stop_hold` 消费真实稳定性样本后才可
+产生 `verified=true`。图像无效、SIFT 证据缺失、状态缺失或时间戳重复时可以安全
+停车或保留原动作，但都不能被解释为目标视角任务成功。
+
+无特征相似度的边界含义：相同图像可能得到 DINO cosine `1.0`，即使 SIFT 内点
+为 0；这是编码器输入相同的结果，不是 SIFT 默认相似度。不同无纹理图会暴露
+匹配证据缺失和图像有效性失败。SIFT 无匹配不会被静默改写为成功或失败。
+
+## 来源和可复现哈希
+
+原文件、部署文件及 SHA256 对照见 `docs/source_provenance.json`。其中
+`va_sft_577_best.pt` 是原项目
+`models/va_sft_577_best/checkpoint/best.pt` 的字节级副本，原 manifest 选择为
+`round11_low_head_replay`、577 条轨迹、`visual_stop_residual`。DINOv2 原缓存
+没有 Git metadata，commit 记为 `unknown`；实际 `dinov2/` 源码在
+`third_party/dinov2`，许可证在 `third_party/DINOV2_LICENSE`。
+
+`scripts/hash_tree.py` 按 POSIX 相对路径排序，逐项哈希
+`relative_path_bytes + NUL + file_sha256_digest`，排除 `__pycache__/**`、
+`*.pyc` 和 `*.pyo`。原始缓存子树和仓库 vendored 子树的结果均为
+`1bd32991d59172509305a98afc73f91e4b42532c36bf01ae70e2d3335ed7488a`。启动推理
+不调用 `torch.hub`，不自动联网或下载权重。

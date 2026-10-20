@@ -21,3 +21,20 @@ Stage A 已完成离线推理整理。不要导入 Isaac，不要重训 VA-SFT�
 7. 只有在人工审查真实图像和硬件信号后，才进行单步低速云台测试；身体六动作需要单独的 G1 安全审批。
 
 可执行的当前基线命令和输入在 `README.md` 与 `docs/validation_report.md` 中，不能用自己生成的输出代替原实现基准。
+
+## Stage A 收尾状态
+
+代码提取、源码树固定、LFS 权重校验、CPU 数值回归和本地 clone 交付验证已通过；
+详见 `docs/validation_report.md` 的 A/B/C 分栏。独立 venv 的 `pip install -e .`
+曾被本次工具审批服务的 401/超时阻塞，不能写成已通过。人工执行时使用：
+
+```bash
+python -m venv /tmp/g1-active-view-venv
+/tmp/g1-active-view-venv/bin/python -m pip install -e /path/to/g1-active-view
+/tmp/g1-active-view-venv/bin/python /path/to/g1-active-view/scripts/prepare_models.py
+```
+
+然后从仓库外运行 README 中的离线推理和 `replay_baseline.py`。先确认两个 LFS
+对象已取回且 SHA256 与 `models/manifest.json` 一致。当前没有远程 GitHub 授权，
+当前本地提交（用 `git rev-parse HEAD` 获取）待人工 review 后再发布。
+本阶段没有验证 GPU、Orin、真实相机或任何运动控制。
